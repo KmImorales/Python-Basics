@@ -1,0 +1,40 @@
+import streamlit as st
+import pandas as pd
+
+# Configurações básicas da página
+st.set_page_config(page_title="Assistente de Licitações", layout="wide")
+
+# Título do projeto
+st.title("📝 Assistente de Licitações")
+st.write("Bem-vindo ao seu assistente inteligente para análise de licitações!")
+
+# Seção de Upload de Arquivos
+st.header("1. Upload de Documentos")
+uploaded_files = st.file_uploader("Faça o upload dos documentos da licitação (PDF, DOCX)", type=["pdf", "docx"], accept_multiple_files=True)
+
+if uploaded_files:
+    st.success(f"{len(uploaded_files)} arquivo(s) carregado(s) com sucesso!")
+    for file in uploaded_files:
+        st.write(f"Arquivo carregado: {file.name}")
+
+# Seção de Pesquisa de Licitações
+st.header("2. Pesquisa de Licitações")
+search_query = st.text_input("Digite uma palavra-chave ou categoria para buscar licitações")
+if st.button("Buscar"):
+    # Aqui seria integrado com um banco de dados ou API para buscar resultados
+    st.write(f"Resultados para: {search_query}")
+    # Exemplo de tabela
+    data = {
+        "Título": ["Licitação A", "Licitação B"],
+        "Prazo": ["2024-12-15", "2024-12-20"],
+        "Requisitos": ["Documento X", "Documento Y"],
+    }
+    df = pd.DataFrame(data)
+    st.dataframe(df)
+
+# Seção de Notificações
+st.header("3. Alertas e Notificações")
+st.write("Nenhum alerta no momento.")
+
+# Rodapé
+st.write("🚀 Desenvolvido com ❤️ para facilitar sua análise de licitações!")
